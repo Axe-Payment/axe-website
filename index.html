@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>axe. — Crypto rails. Bank-grade compliance.</title>
+<meta name="description" content="The API for regulated money movement. axe. is a regulated crypto aggregator for Pakistan's banks and fintechs — one API across multiple licensed VASPs and PSPs, with KYT, Travel Rule, and reconciliation built in." />
+<meta name="theme-color" content="#0B0F1A" />
+
+<meta property="og:title" content="axe. — Crypto rails. Bank-grade compliance." />
+<meta property="og:description" content="The API for regulated money movement." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://axepayments.com" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink:        #0B0F1A;
+    --ink-2:      #11151F;
+    --slate:      #1A1F2E;
+    --slate-2:    #232839;
+    --plasma:     #FAFAF7;
+    --plasma-2:   #F0F0EA;
+    --voltage:    #C8FF00;
+    --voltage-2:  #A8E000;
+    --fog:        #9CA3AF;
+    --fog-2:      #6B7280;
+    --hairline:   rgba(255,255,255,.08);
+    --hairline-d: rgba(11,15,26,.08);
+
+    --container:  1280px;
+    --r-sm:       6px;
+    --r:          10px;
+    --r-lg:       18px;
+
+    --display:    'Space Grotesk', 'Söhne Breit', system-ui, -apple-system, sans-serif;
+    --body:       'Inter', 'Söhne', system-ui, -apple-system, sans-serif;
+    --mono:       'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+  }
+
+  *,*::before,*::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; background: var(--ink); }
+  body {
+    margin: 0; font-family: var(--body); color: var(--plasma);
+    background: var(--ink); font-size: 14px; line-height: 1.55;
+    font-feature-settings: "ss01","cv05","cv11";
+  }
+  img, svg { display:block; max-width:100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  ::selection { background: var(--voltage); color: var(--ink); }
+
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
+
+  /* ==== Type ==== */
+  .display { font-family: var(--display); font-weight: 700; letter-spacing: -.035em; line-height: 1.02; }
+  .display-xl { font-size: clamp(48px, 6.4vw, 96px); }
+  .display-lg { font-size: clamp(38px, 4.4vw, 64px); }
+  .display-md { font-size: clamp(30px, 3.2vw, 44px); }
+  .display-sm { font-size: clamp(24px, 2.6vw, 32px); }
+  .label { font-family: var(--body); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--fog); }
+  .mono { font-family: var(--mono); font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+  .lead { font-size: 16px; color: var(--fog); line-height: 1.6; max-width: 640px; }
+  h1,h2,h3,h4,h5 { margin: 0; font-weight: 600; letter-spacing: -.015em; line-height: 1.2; }
+  p { margin: 0; }
+
+  .voltage { color: var(--voltage); }
+
+  /* ==== Buttons ==== */
+  .btn { display:inline-flex; align-items:center; gap: 10px; padding: 12px 20px; border-radius: 4px; font-family: var(--body); font-weight: 600; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; border: 1px solid transparent; transition: transform .12s, background .15s, color .15s, border-color .15s; white-space: nowrap; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn--lime { background: var(--voltage); color: var(--ink); }
+  .btn--lime:hover { background: var(--voltage-2); }
+  .btn--ghost { background: transparent; color: var(--plasma); border-color: rgba(255,255,255,.16); }
+  .btn--ghost:hover { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.32); }
+  .btn--ghost-d { background: transparent; color: var(--ink); border-color: rgba(11,15,26,.20); }
+  .btn--ghost-d:hover { background: rgba(11,15,26,.04); border-color: var(--ink); }
+  .btn .arr { transition: transform .15s; }
+  .btn:hover .arr { transform: translateX(4px); }
+
+  /* ==== Brand wordmark ==== */
+  .brand { font-family: var(--display); font-weight: 700; letter-spacing: -.05em; font-size: 22px; color: var(--plasma); display: inline-block; line-height: 1; }
+  .brand .dot { color: var(--voltage); }
+
+  /* ==== Announce ==== */
+  .announce { background: var(--ink); color: var(--fog); padding: 10px 0; border-bottom: 1px solid var(--hairline); font-size: 12px; }
+  .announce__row { display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .announce__pill { background: var(--voltage); color: var(--ink); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 9px; padding: 3px 8px; }
+  .announce a { color: var(--plasma); border-bottom: 1px dotted var(--fog-2); padding-bottom: 1px; }
+  .announce a:hover { color: var(--voltage); border-color: var(--voltage); }
+
+  /* ==== Nav ==== */
+  .nav-wrap { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px); background: rgba(11,15,26,.86); border-bottom: 1px solid var(--hairline); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .nav__links { display: flex; align-items: center; gap: 4px; }
+  .nav__item { position: relative; }
+  .nav__link { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; font-size: 13px; font-weight: 500; color: var(--plasma); border-radius: 4px; letter-spacing: .02em; }
+  .nav__link:hover { background: rgba(255,255,255,.04); color: var(--voltage); }
+  .nav__link svg { opacity: .6; transition: transform .15s; }
+  .nav__item:hover .nav__link svg { transform: rotate(180deg); }
+  .nav__panel { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); min-width: 600px; padding: 22px; background: var(--slate); border: 1px solid var(--hairline); border-radius: var(--r); box-shadow: 0 30px 60px rgba(0,0,0,.6); opacity: 0; pointer-events: none; transition: opacity .15s, transform .15s; }
+  .nav__panel--wide { min-width: 720px; }
+  .nav__item:hover .nav__panel { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .nav-grid--3 { grid-template-columns: 1fr 1fr 1fr; }
+  .nav-card { display: grid; grid-template-columns: 32px 1fr; gap: 12px; padding: 12px; border-radius: 6px; transition: background .15s; }
+  .nav-card:hover { background: rgba(255,255,255,.04); }
+  .nav-card__icon { width: 32px; height: 32px; background: var(--ink); border: 1px solid var(--hairline); border-radius: 4px; display: grid; place-items: center; color: var(--voltage); }
+  .nav-card__title { display: block; font-weight: 500; font-size: 13px; color: var(--plasma); }
+  .nav-card__desc { display: block; font-size: 12px; color: var(--fog); margin-top: 3px; line-height: 1.5; }
+  .nav__cta { display: flex; align-items: center; gap: 10px; }
+
+  /* ==== Hero ==== */
+  .hero { position: relative; padding: 120px 0 80px; overflow: hidden; isolation: isolate; }
+  .hero::before { content: ""; position: absolute; top: -300px; right: -200px; width: 800px; height: 800px; background: radial-gradient(closest-side, rgba(200,255,0,.16), rgba(200,255,0,0) 70%); filter: blur(40px); pointer-events: none; z-index: 0; animation: hero-glow 18s ease-in-out infinite alternate; }
+  @keyframes hero-glow { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(-60px,40px,0) scale(1.06); } }
+  .hero__grid-bg { position: absolute; inset: 0; pointer-events: none; opacity: .25; z-index: 0; background-image: linear-gradient(var(--hairline) 1px, transparent 1px), linear-gradient(90deg, var(--hairline) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse at 50% 0%, #000 30%, transparent 80%); }
+  .hero > .container { position: relative; z-index: 1; }
+  .hero__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .hero__eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid var(--hairline); border-radius: 999px; background: rgba(255,255,255,.02); font-size: 11px; font-weight: 500; letter-spacing: .14em; color: var(--fog); text-transform: uppercase; }
+  .hero__eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--voltage); box-shadow: 0 0 0 4px rgba(200,255,0,.18); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .5; } }
+  .hero__title { font-family: var(--display); font-weight: 700; font-size: clamp(46px, 5.4vw, 84px); line-height: 1.04; letter-spacing: -.04em; color: var(--plasma); margin-top: 28px; }
+  .rotator { display: inline-block; color: var(--voltage); transition: opacity .28s ease, transform .28s ease; }
+  .rotator.is-out { opacity: 0; transform: translateY(10px); }
+  .hero__sub { color: var(--fog); font-size: 18px; line-height: 1.55; max-width: 560px; margin-top: 22px; }
+  .hero__cta { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero__metrics { margin-top: 56px; padding-top: 30px; border-top: 1px solid var(--hairline); display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .metric__num { font-family: var(--display); font-weight: 700; font-size: 32px; letter-spacing: -.03em; line-height: 1; color: var(--plasma); }
+  .metric__num .unit { color: var(--fog); font-weight: 500; font-size: .65em; margin-left: 2px; }
+  .metric__lbl { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--fog); margin-top: 8px; font-weight: 500; }
+
+  /* ==== Live transaction card (right hero) ==== */
+  .live-card { background: var(--slate); border: 1px solid var(--hairline); border-radius: var(--r); padding: 0; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.5); }
+  .live-card__head { padding: 14px 18px; border-bottom: 1px solid var(--hairline); display: flex; align-items: center; gap: 10px; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--voltage); box-shadow: 0 0 0 3px rgba(200,255,0,.16); animation: pulse 2s ease-in-out infinite; }
+  .live-card__title { font-size: 11px; font-weight: 500; color: var(--fog); letter-spacing: .12em; text-transform: uppercase; flex: 1; }
+  .live-card__pill { font-family: var(--mono); font-size: 11px; color: var(--plasma); padding: 3px 8px; background: rgba(255,255,255,.04); border: 1px solid var(--hairline); border-radius: 4px; letter-spacing: 0; }
+  .live-card__rows { padding: 8px 0; }
+  .row { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; padding: 10px 18px; font-size: 13px; transition: background .15s; }
+  .row:hover { background: rgba(255,255,255,.02); }
+  .row__bullet { width: 4px; height: 4px; border-radius: 50%; background: var(--fog-2); }
+  .row--accent .row__bullet { background: var(--voltage); }
+  .row--accent { background: rgba(200,255,0,.04); border-left: 2px solid var(--voltage); padding-left: 16px; }
+  .row__lbl { color: var(--plasma); }
+  .row__lbl .lbl-dim { color: var(--fog); }
+  .row__val { font-family: var(--mono); color: var(--fog); font-size: 12px; }
+
+  /* ==== Compliance strip (above the fold per brand spec) ==== */
+  .compliance { background: var(--ink); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .compliance__inner { display: flex; align-items: center; gap: 36px; padding: 18px 0; flex-wrap: wrap; }
+  .compliance__lbl { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--fog-2); font-weight: 500; flex-shrink: 0; }
+  .compliance__items { display: flex; gap: 28px; flex: 1; flex-wrap: wrap; }
+  .compliance__item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--plasma); font-weight: 500; }
+  .compliance__item svg { color: var(--fog); }
+
+  /* ==== Logo marquee ==== */
+  .logo-marquee { background: var(--ink-2); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); padding: 36px 0; overflow: hidden; }
+  .logo-marquee__lbl { text-align: center; color: var(--fog-2); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; margin-bottom: 24px; }
+  .logo-marquee__track { display: flex; gap: 64px; align-items: center; animation: scroll 32s linear infinite; width: max-content; }
+  @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .partner-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; color: var(--fog); transition: color .2s; }
+  .partner-logo:hover { color: var(--plasma); }
+  .partner-logo__mark { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--hairline); border-radius: 4px; flex-shrink: 0; }
+  .partner-logo__name { font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: -.025em; }
+  .partner-logo__sub { font-size: 11px; color: var(--fog-2); margin-left: 4px; font-family: var(--mono); }
+
+  /* ==== Section base ==== */
+  section { padding: 120px 0; }
+  section.tight { padding: 80px 0; }
+  .sect-head { max-width: 720px; margin-bottom: 64px; }
+  .sect-head--center { text-align: center; margin-left: auto; margin-right: auto; }
+  .sect-head .lead { margin-top: 16px; }
+  .sect-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--voltage); display: inline-flex; align-items: center; gap: 8px; }
+  .sect-eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--voltage); }
+
+  /* ==== Pillars ==== */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .pillar { background: var(--ink-2); padding: 36px; transition: background .2s; }
+  .pillar:hover { background: var(--slate); }
+  .pillar__num { font-family: var(--mono); font-size: 11px; color: var(--fog); margin-bottom: 28px; letter-spacing: .1em; }
+  .pillar__icon { width: 40px; height: 40px; border: 1px solid var(--hairline); border-radius: 4px; display: grid; place-items: center; color: var(--voltage); margin-bottom: 24px; }
+  .pillar__title { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: -.02em; margin-bottom: 12px; color: var(--plasma); }
+  .pillar__desc { color: var(--fog); font-size: 14px; line-height: 1.65; }
+
+  /* ==== Architecture ==== */
+  .arch { padding: 120px 0; background: var(--ink-2); }
+  .arch__box { background: var(--ink); border: 1px solid var(--hairline); border-radius: var(--r); padding: 48px; }
+  .arch__grid { display: grid; gap: 32px; }
+  .arch__tier { background: var(--slate); border: 1px solid var(--hairline); border-radius: var(--r); padding: 24px 28px; text-align: center; }
+  .arch__tier-lbl { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--fog); margin-bottom: 8px; }
+  .arch__tier-name { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: -.02em; color: var(--plasma); }
+  .arch__tier-sub { color: var(--fog); font-size: 13px; margin-top: 8px; }
+  .arch__tier--axe { background: var(--ink); border: 1px solid var(--voltage); position: relative; }
+  .arch__tier--axe::before { content: ""; position: absolute; top: -1px; left: 0; right: 0; height: 1px; background: var(--voltage); box-shadow: 0 0 24px rgba(200,255,0,.4); }
+  .arch__caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 18px; }
+  .arch__cap { background: var(--ink-2); border: 1px solid var(--hairline); padding: 10px 12px; border-radius: 4px; text-align: left; }
+  .arch__cap strong { display: block; font-size: 12px; color: var(--plasma); font-weight: 500; }
+  .arch__cap span { font-size: 11px; color: var(--fog); font-family: var(--mono); }
+  .arch__rails { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .arch__rail { background: var(--slate); border: 1px solid var(--hairline); border-radius: var(--r); padding: 22px; }
+  .arch__rail-lbl { display: inline-block; padding: 4px 10px; border-radius: 3px; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 16px; border: 1px solid var(--hairline); color: var(--fog); }
+  .arch__rail-items { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .arch__rail-item { background: var(--ink); border: 1px solid var(--hairline); border-radius: 4px; padding: 12px 10px; font-size: 12px; font-weight: 500; text-align: center; color: var(--plasma); }
+  .arch__rail-note { margin-top: 14px; font-size: 12px; color: var(--fog); }
+  .arch__caption { margin-top: 24px; text-align: center; font-size: 12px; color: var(--fog); }
+
+  /* ==== Showcase ==== */
+  .showcase { display: flex; flex-direction: column; gap: 96px; }
+  .show-row { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .show-row--reverse .show-row__visual { order: -1; }
+  .show-row__eyebrow { color: var(--voltage); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; }
+  .show-row__title { font-family: var(--display); font-weight: 700; font-size: clamp(28px, 3vw, 42px); line-height: 1.05; letter-spacing: -.03em; margin: 14px 0 18px; color: var(--plasma); }
+  .show-row__desc { color: var(--fog); font-size: 15px; line-height: 1.65; max-width: 540px; }
+  .show-row__bullets { margin: 24px 0 28px; padding: 0; list-style: none; display: grid; gap: 14px; }
+  .show-row__bullets li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; font-size: 14px; color: var(--plasma); align-items: start; }
+  .show-row__bullets li::before { content: ""; width: 6px; height: 6px; background: var(--voltage); border-radius: 50%; margin-top: 8px; }
+  .show-row__cta { display: flex; gap: 10px; align-items: center; }
+  .link-arr { display: inline-flex; align-items: center; gap: 6px; color: var(--plasma); font-weight: 500; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; padding-bottom: 4px; border-bottom: 1px solid var(--hairline); transition: color .15s, border-color .15s; }
+  .link-arr:hover { color: var(--voltage); border-color: var(--voltage); }
+  .show-row__visual { aspect-ratio: 4/3; background: var(--slate); border: 1px solid var(--hairline); border-radius: var(--r); padding: 28px; position: relative; overflow: hidden; display: grid; place-items: center; }
+  .show-row__visual::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,255,0,.04) 0%, rgba(200,255,0,0) 60%); pointer-events: none; }
+  .show-row__visual svg { position: relative; z-index: 1; }
+
+  /* ==== Industries ==== */
+  .industries-band { background: var(--ink); }
+  .industries { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .industry { background: var(--ink-2); padding: 28px; transition: background .2s; }
+  .industry:hover { background: var(--slate); }
+  .industry__num { font-family: var(--mono); font-size: 10px; color: var(--fog-2); margin-bottom: 18px; }
+  .industry__icon { width: 36px; height: 36px; border: 1px solid var(--hairline); border-radius: 4px; display: grid; place-items: center; color: var(--voltage); margin-bottom: 18px; }
+  .industry__title { font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: -.02em; color: var(--plasma); margin-bottom: 8px; }
+  .industry__desc { font-size: 12.5px; color: var(--fog); line-height: 1.55; }
+
+  /* ==== Infrastructure tabs ==== */
+  .infra-band { background: var(--ink-2); }
+  .infra-tabs { display: grid; grid-template-columns: 340px 1fr; gap: 24px; }
+  .infra-nav { display: flex; flex-direction: column; gap: 8px; }
+  .infra-tab { display: grid; grid-template-columns: 36px 1fr auto; gap: 14px; align-items: center; padding: 18px; border-radius: var(--r); background: var(--ink); border: 1px solid var(--hairline); text-align: left; cursor: pointer; transition: all .15s; color: var(--plasma); font-family: inherit; }
+  .infra-tab:hover { background: var(--slate); }
+  .infra-tab.active { background: var(--slate); border-color: var(--voltage); }
+  .infra-tab.active .infra-tab__icon { background: var(--voltage); color: var(--ink); border-color: var(--voltage); }
+  .infra-tab__icon { width: 36px; height: 36px; border: 1px solid var(--hairline); border-radius: 4px; display: grid; place-items: center; color: var(--voltage); transition: all .15s; }
+  .infra-tab__title { display: block; font-weight: 600; font-size: 15px; color: var(--plasma); }
+  .infra-tab__sub { display: block; font-size: 12px; color: var(--fog); margin-top: 4px; line-height: 1.4; }
+  .infra-tab__arr { color: var(--fog-2); }
+  .infra-tab.active .infra-tab__arr { color: var(--voltage); }
+  .infra-panel { background: var(--ink); border: 1px solid var(--hairline); border-radius: var(--r); padding: 40px; display: none; }
+  .infra-panel.active { display: block; }
+  .infra-panel__title { font-family: var(--display); font-weight: 700; font-size: 30px; letter-spacing: -.025em; line-height: 1.1; margin-bottom: 14px; color: var(--plasma); }
+  .infra-panel__desc { color: var(--fog); font-size: 15px; line-height: 1.65; max-width: 580px; margin-bottom: 32px; }
+  .infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .infra-item { background: var(--ink-2); padding: 22px; }
+  .infra-item__num { font-family: var(--display); font-weight: 700; font-size: 28px; letter-spacing: -.025em; color: var(--plasma); }
+  .infra-item__title { font-weight: 500; font-size: 13px; color: var(--plasma); margin: 6px 0 6px; }
+  .infra-item__desc { font-size: 12px; color: var(--fog); line-height: 1.55; }
+
+  /* ==== Stats band ==== */
+  .scale { background: var(--ink); }
+  .scale__grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr; gap: 32px; align-items: center; }
+  .scale__intro h2 { font-family: var(--display); font-weight: 700; font-size: clamp(32px, 3.4vw, 50px); line-height: 1.05; letter-spacing: -.03em; color: var(--plasma); }
+  .scale__intro p { color: var(--fog); margin-top: 14px; font-size: 14.5px; }
+  .scale__num { display: flex; flex-direction: column; }
+  .scale__num-big { font-family: var(--display); font-weight: 700; font-size: clamp(40px, 4.6vw, 64px); letter-spacing: -.035em; color: var(--plasma); line-height: 1; }
+  .scale__num-big .voltage { color: var(--voltage); }
+  .scale__num-lbl { font-size: 11px; color: var(--fog); letter-spacing: .12em; text-transform: uppercase; margin-top: 12px; }
+
+  /* ==== Insights ==== */
+  .insights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .insight { background: var(--ink-2); border: 1px solid var(--hairline); border-radius: var(--r); overflow: hidden; transition: transform .15s, border-color .15s; }
+  .insight:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.18); }
+  .insight__cover { aspect-ratio: 16/9; background: var(--slate); position: relative; overflow: hidden; }
+  .insight__cover::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 80% 90%, rgba(200,255,0,.08) 0%, transparent 50%); }
+  .insight__cover-tag { position: absolute; top: 14px; left: 14px; padding: 4px 8px; background: rgba(11,15,26,.7); backdrop-filter: blur(8px); border: 1px solid var(--hairline); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; color: var(--plasma); }
+  .insight__cover-title { position: absolute; bottom: 18px; left: 20px; right: 20px; font-family: var(--display); font-weight: 700; font-size: 18px; line-height: 1.2; letter-spacing: -.02em; color: var(--plasma); }
+  .insight__body { padding: 22px; }
+  .insight__date { font-family: var(--mono); font-size: 11px; color: var(--fog-2); }
+  .insight__head { font-size: 16px; font-weight: 600; margin: 8px 0 10px; line-height: 1.3; color: var(--plasma); }
+  .insight__excerpt { font-size: 13px; color: var(--fog); line-height: 1.55; }
+  .insight__more { display: inline-flex; gap: 4px; margin-top: 14px; font-size: 12px; font-weight: 500; color: var(--voltage); letter-spacing: .04em; text-transform: uppercase; }
+
+  /* ==== FAQ ==== */
+  .faq { border-top: 1px solid var(--hairline); }
+  .faq-item { border-bottom: 1px solid var(--hairline); }
+  .faq-item summary { list-style: none; cursor: pointer; padding: 24px 8px; display: flex; justify-content: space-between; align-items: center; gap: 18px; font-size: 17px; font-weight: 500; color: var(--plasma); transition: color .15s; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary:hover { color: var(--voltage); }
+  .faq-item summary::after { content: "+"; font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1; width: 32px; height: 32px; flex-shrink: 0; border: 1px solid var(--hairline); border-radius: 50%; display: grid; place-items: center; transition: transform .2s, background .15s, color .15s, border-color .15s; }
+  .faq-item[open] summary::after { content: "−"; transform: rotate(180deg); background: var(--voltage); color: var(--ink); border-color: var(--voltage); }
+  .faq-item__body { padding: 0 8px 28px; max-width: 760px; color: var(--fog); font-size: 14.5px; line-height: 1.65; }
+
+  /* ==== CTA ==== */
+  .cta-band { padding: 120px 0; background: var(--ink); position: relative; overflow: hidden; }
+  .cta-band::before { content: ""; position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; background: radial-gradient(closest-side, rgba(200,255,0,.18), transparent 70%); filter: blur(40px); pointer-events: none; }
+  .cta-grid { position: relative; display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: center; }
+  .cta-band h2 { font-family: var(--display); font-weight: 700; font-size: clamp(36px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -.035em; color: var(--plasma); }
+  .cta-band p { color: var(--fog); margin-top: 18px; max-width: 540px; font-size: 16px; line-height: 1.6; }
+  .cta-band__buttons { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .cta-band__list { display: flex; flex-direction: column; gap: 16px; padding: 32px; background: var(--slate); border: 1px solid var(--hairline); border-radius: var(--r); }
+  .cta-band__list-item { display: grid; grid-template-columns: 16px 1fr; gap: 12px; font-size: 13.5px; color: var(--plasma); }
+  .cta-band__list-item::before { content: ""; width: 6px; height: 6px; background: var(--voltage); border-radius: 50%; margin-top: 8px; }
+
+  /* ==== Footer ==== */
+  .footer { background: var(--ink); padding: 80px 0 40px; border-top: 1px solid var(--hairline); }
+  .footer__top { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 36px; padding-bottom: 56px; border-bottom: 1px solid var(--hairline); }
+  .footer__brand { display: flex; flex-direction: column; gap: 18px; }
+  .footer__brand-desc { color: var(--fog); font-size: 13px; line-height: 1.6; max-width: 280px; }
+  .footer__col h5 { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--fog-2); font-weight: 600; margin-bottom: 16px; }
+  .footer__col ul { padding: 0; margin: 0; list-style: none; display: grid; gap: 10px; }
+  .footer__col a { font-size: 13px; color: var(--fog); transition: color .15s; }
+  .footer__col a:hover { color: var(--plasma); }
+  .footer__bot { padding-top: 28px; display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+  .footer__bot p { font-size: 11px; color: var(--fog-2); }
+  .footer__legal { display: flex; gap: 22px; flex-wrap: wrap; font-size: 11px; }
+  .footer__legal a { color: var(--fog-2); }
+  .footer__legal a:hover { color: var(--plasma); }
+
+  /* ==== Scroll progress ==== */
+  .scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: var(--voltage); width: 0%; z-index: 60; transition: width .08s linear; }
+
+  /* ==== Reveal anims ==== */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-stagger > * { opacity: 0; transform: translateY(16px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal-stagger.in > *:nth-child(1) { transition-delay: 60ms; opacity:1; transform:none; }
+  .reveal-stagger.in > *:nth-child(2) { transition-delay: 140ms; opacity:1; transform:none; }
+  .reveal-stagger.in > *:nth-child(3) { transition-delay: 220ms; opacity:1; transform:none; }
+  .reveal-stagger.in > *:nth-child(4) { transition-delay: 300ms; opacity:1; transform:none; }
+  .reveal-stagger.in > *:nth-child(5) { transition-delay: 380ms; opacity:1; transform:none; }
+  .reveal-stagger.in > *:nth-child(6) { transition-delay: 460ms; opacity:1; transform:none; }
+  .reveal-stagger.in > *:nth-child(7) { transition-delay: 540ms; opacity:1; transform:none; }
+  .reveal-stagger.in > *:nth-child(8) { transition-delay: 620ms; opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.in, .reveal-stagger > *, .reveal-stagger.in > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .hero::before, .logo-marquee__track, .live-dot, .hero__eyebrow::before { animation: none !important; }
+  }
+
+  /* ==== Mobile ==== */
+  @media (max-width: 1024px) {
+    .nav__links { display: none; }
+    .hero__grid, .show-row, .scale__grid, .infra-tabs, .cta-grid, .footer__top { grid-template-columns: 1fr; }
+    .pillars, .industries, .arch__rails, .arch__rail-items, .arch__caps, .insights { grid-template-columns: repeat(2, 1fr); }
+    .show-row--reverse .show-row__visual { order: 0; }
+    section { padding: 80px 0; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 80px 0 60px; }
+    .pillars, .industries, .arch__rail-items, .arch__caps, .insights { grid-template-columns: 1fr; }
+    .footer__top { grid-template-columns: 1fr; }
+    .hero__metrics { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ============== ANNOUNCE ============== -->
+<div class="announce">
+  <div class="container announce__row">
+    <span class="announce__pill">Live</span>
+    <span>axe. is now in the SBP &amp; PVARA regulatory sandbox.</span>
+    <a href="#newsroom">Read the announcement →</a>
+  </div>
+</div>
+
+<!-- ============== NAV ============== -->
+<div class="nav-wrap">
+  <div class="container nav">
+    <a href="#" class="brand" aria-label="Axe Payments">axe<span class="dot">.</span></a>
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item">
+        <a class="nav__link" href="#products">Products
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav__panel nav__panel--wide">
+          <div class="nav-grid nav-grid--3">
+            <a class="nav-card" href="#onramp"><span class="nav-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span><span><span class="nav-card__title">On-ramp</span><span class="nav-card__desc">PKR → crypto in seconds</span></span></a>
+            <a class="nav-card" href="#offramp"><span class="nav-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></span><span><span class="nav-card__title">Off-ramp</span><span class="nav-card__desc">Crypto → PKR same day</span></span></a>
+            <a class="nav-card" href="#transfer"><span class="nav-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 1 4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="m7 23-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span><span><span class="nav-card__title">Transfer</span><span class="nav-card__desc">Cross-border with Travel Rule</span></span></a>
+            <a class="nav-card" href="#routing"><span class="nav-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/></svg></span><span><span class="nav-card__title">Smart Routing</span><span class="nav-card__desc">Optimal execution</span></span></a>
+            <a class="nav-card" href="#kyt"><span class="nav-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span><span class="nav-card__title">KYT &amp; Compliance</span><span class="nav-card__desc">Travel Rule, sanctions</span></span></a>
+            <a class="nav-card" href="#recon"><span class="nav-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/><path d="M12 9v6"/></svg></span><span><span class="nav-card__title">Reconciliation</span><span class="nav-card__desc">T+1 break detection</span></span></a>
+          </div>
+        </div>
+      </div>
+      <a class="nav__link" href="#solutions">Solutions</a>
+      <a class="nav__link" href="#infra">Infrastructure</a>
+      <a class="nav__link" href="#docs">Developers</a>
+      <a class="nav__link" href="#newsroom">Insights</a>
+    </nav>
+    <div class="nav__cta">
+      <a href="#contact" class="btn btn--ghost">Read docs</a>
+      <a href="#contact" class="btn btn--lime">Talk to sales <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero__grid-bg" aria-hidden="true"></div>
+  <div class="container hero__grid">
+    <div>
+      <span class="hero__eyebrow">Rails live · 12 chains · sandbox</span>
+      <h1 class="hero__title">Building blocks for the future of <span class="rotator" data-words="crypto,money,banking">crypto</span> in Pakistan.</h1>
+      <p class="hero__sub">One API for regulated money movement. Banks and fintechs plug in once and offer their customers on-ramp, off-ramp, and stablecoin transfers — across multiple licensed VASPs and PSPs.</p>
+      <div class="hero__cta">
+        <a href="#contact" class="btn btn--lime">Talk to sales <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a href="#docs" class="btn btn--ghost">Read docs</a>
+      </div>
+      <div class="hero__metrics">
+        <div><div class="metric__num"><span data-count="35" data-prefix="$" data-suffix="B">$35B</span><span class="unit">+</span></div><div class="metric__lbl">Annual remittance pool</div></div>
+        <div><div class="metric__num">8–12<span class="unit"> wks</span></div><div class="metric__lbl">Contract to live API</div></div>
+        <div><div class="metric__num"><span data-count="0">0</span></div><div class="metric__lbl">New licences for the bank</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="live-card">
+        <div class="live-card__head">
+          <span class="live-dot"></span>
+          <span class="live-card__title">Live transaction · sandbox</span>
+          <span class="live-card__pill" id="livePill">settled · 4.2s</span>
+        </div>
+        <div class="live-card__rows">
+          <div class="row"><span class="row__bullet"></span><span class="row__lbl">order placed <span class="lbl-dim">· bank app</span></span><span class="row__val">PKR 50,000.00</span></div>
+          <div class="row"><span class="row__bullet"></span><span class="row__lbl">KYT &amp; Travel Rule <span class="lbl-dim">cleared</span></span><span class="row__val">+280ms</span></div>
+          <div class="row"><span class="row__bullet"></span><span class="row__lbl">smart routing <span class="lbl-dim">· VASP-A</span></span><span class="row__val">best of 4</span></div>
+          <div class="row"><span class="row__bullet"></span><span class="row__lbl">RAAST debit <span class="lbl-dim">· PKR cleared</span></span><span class="row__val">T+0</span></div>
+          <div class="row row--accent"><span class="row__bullet"></span><span class="row__lbl">Crypto Added to Wallet</span><span class="row__val">100ms</span></div>
+          <div class="row"><span class="row__bullet"></span><span class="row__lbl">webhook <span class="lbl-dim">· order.settled signed</span></span><span class="row__val">200 OK</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COMPLIANCE STRIP ============== -->
+<div class="compliance">
+  <div class="container compliance__inner">
+    <span class="compliance__lbl">Compliance</span>
+    <div class="compliance__items">
+      <span class="compliance__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1l9 4v7c0 5-4 9-9 11-5-2-9-6-9-11V5z"/></svg>SBP Sandbox</span>
+      <span class="compliance__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1l9 4v7c0 5-4 9-9 11-5-2-9-6-9-11V5z"/></svg>PVARA Sandbox</span>
+      <span class="compliance__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>FATF R.16 · IVMS 101</span>
+      <span class="compliance__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>AML Act 2010</span>
+      <span class="compliance__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>SOC 2 Type II <span style="color:var(--fog-2);font-family:var(--mono);margin-left:4px">in progress</span></span>
+      <span class="compliance__item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>ISO 27001 <span style="color:var(--fog-2);font-family:var(--mono);margin-left:4px">planned</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============== LOGO MARQUEE — partners with logos ============== -->
+<div class="logo-marquee">
+  <div class="container">
+    <p class="logo-marquee__lbl">Working with the regulators, vendors and standards that banks already trust</p>
+  </div>
+  <div class="logo-marquee__track" aria-hidden="true">
+    <!-- SBP Sandbox -->
+    <a class="partner-logo">
+      <span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9 21v-6h6v6"/></svg></span>
+      <span class="partner-logo__name">SBP Sandbox</span>
+    </a>
+    <!-- PVARA -->
+    <a class="partner-logo">
+      <span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+      <span class="partner-logo__name">PVARA</span><span class="partner-logo__sub">Compliance</span>
+    </a>
+    <!-- Notabene -->
+    <a class="partner-logo">
+      <span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12h6"/><path d="M12 9v6"/></svg></span>
+      <span class="partner-logo__name">Notabene</span>
+    </a>
+    <!-- ISO 27001 -->
+    <a class="partner-logo">
+      <span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <span class="partner-logo__name">ISO 27001</span><span class="partner-logo__sub">planned</span>
+    </a>
+    <!-- Chainalysis -->
+    <a class="partner-logo">
+      <span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/><path d="M2 7l10 5 10-5"/><path d="M12 22V12"/></svg></span>
+      <span class="partner-logo__name">Chainalysis</span>
+    </a>
+    <!-- AML Act -->
+    <a class="partner-logo">
+      <span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span>
+      <span class="partner-logo__name">AML Act 2010</span>
+    </a>
+    <!-- TRM Labs -->
+    <a class="partner-logo">
+      <span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <span class="partner-logo__name">TRM Labs</span>
+    </a>
+    <!-- duplicate set for seamless loop -->
+    <a class="partner-logo"><span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9 21v-6h6v6"/></svg></span><span class="partner-logo__name">SBP Sandbox</span></a>
+    <a class="partner-logo"><span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="partner-logo__name">PVARA</span><span class="partner-logo__sub">Compliance</span></a>
+    <a class="partner-logo"><span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12h6"/><path d="M12 9v6"/></svg></span><span class="partner-logo__name">Notabene</span></a>
+    <a class="partner-logo"><span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg></span><span class="partner-logo__name">ISO 27001</span><span class="partner-logo__sub">planned</span></a>
+    <a class="partner-logo"><span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/><path d="M2 7l10 5 10-5"/><path d="M12 22V12"/></svg></span><span class="partner-logo__name">Chainalysis</span></a>
+    <a class="partner-logo"><span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span class="partner-logo__name">AML Act 2010</span></a>
+    <a class="partner-logo"><span class="partner-logo__mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg></span><span class="partner-logo__name">TRM Labs</span></a>
+  </div>
+</div>
+
+<!-- ============== PILLARS ============== -->
+<section>
+  <div class="container">
+    <div class="sect-head sect-head--center">
+      <span class="sect-eyebrow">What we stand for</span>
+      <h2 class="display display-lg" style="margin-top:18px">A regulated, tech-first aggregator built in Pakistan.</h2>
+      <p class="lead" style="margin: 18px auto 0">Three commitments shape every product decision at axe. They are written into our architecture, our licences, and our customer contracts.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar__num">01</div>
+        <div class="pillar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1l9 4v7c0 5-4 9-9 11-5-2-9-6-9-11V5z"/></svg></div>
+        <h3 class="pillar__title">Regulated &amp; compliant</h3>
+        <p class="pillar__desc">SBP and PVARA Sandbox engagement, AML Act 2010 Reporting Entity registration, FATF Travel Rule from day one. The regulatory perimeter is the defining feature of the product, not an afterthought.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar__num">02</div>
+        <div class="pillar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg></div>
+        <h3 class="pillar__title">Engineering-first</h3>
+        <p class="pillar__desc">Bank-grade APIs, idempotent endpoints, append-only audit log, hash-chained ledger. We ship the SDK, the Postman collection, the OpenAPI spec, and a sandbox before the contract.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar__num">03</div>
+        <div class="pillar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10A15.3 15.3 0 0 1 8 12a15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3 class="pillar__title">Built in the region</h3>
+        <p class="pillar__desc">RAAST, 1LINK, and IBFT are the spine of every flow. Pricing in PKR, settlement to PKR, support and docs written for Pakistani engineering teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ARCHITECTURE ============== -->
+<section class="arch" id="how-it-works">
+  <div class="container">
+    <div class="sect-head sect-head--center">
+      <span class="sect-eyebrow">Architecture</span>
+      <h2 class="display display-lg" style="margin-top:18px">A single API, two regulated rails, many counterparties.</h2>
+      <p class="lead" style="margin: 18px auto 0">axe. is the orchestration layer. Custody and licences live with our partner VASPs and PSPs — not on our balance sheet, and not on yours.</p>
+    </div>
+    <div class="arch__box">
+      <div class="arch__grid">
+        <div class="arch__tier">
+          <div class="arch__tier-lbl">Tenant</div>
+          <div class="arch__tier-name">Bank · Fintech · EMI</div>
+          <p class="arch__tier-sub">Mobile app · KYC · ledger · end-customer touchpoint</p>
+        </div>
+        <div class="arch__tier arch__tier--axe">
+          <div class="arch__tier-lbl voltage">axe.</div>
+          <div class="arch__tier-name">Orchestration core</div>
+          <p class="arch__tier-sub">No custody · no principal balance · append-only audit</p>
+          <div class="arch__caps">
+            <div class="arch__cap"><strong>Smart Routing</strong><span>cost · liquidity · uptime</span></div>
+            <div class="arch__cap"><strong>KYT</strong><span>pre-submission screening</span></div>
+            <div class="arch__cap"><strong>Travel Rule</strong><span>FATF R.16 · IVMS 101</span></div>
+            <div class="arch__cap"><strong>Reconciliation</strong><span>T+1 break detection</span></div>
+          </div>
+        </div>
+        <div class="arch__rails">
+          <div class="arch__rail">
+            <span class="arch__rail-lbl" style="color:var(--voltage); border-color:rgba(200,255,0,.32)">Fiat rail · PKR</span>
+            <div class="arch__rail-items">
+              <div class="arch__rail-item">RAAST</div>
+              <div class="arch__rail-item">1LINK</div>
+              <div class="arch__rail-item">Card PSPs</div>
+              <div class="arch__rail-item">Wallets</div>
+            </div>
+            <p class="arch__rail-note">PSPs hold the PKR licence — axe. never moves fiat.</p>
+          </div>
+          <div class="arch__rail">
+            <span class="arch__rail-lbl" style="color:var(--voltage); border-color:rgba(200,255,0,.32)">Crypto rail · VASPs</span>
+            <div class="arch__rail-items">
+              <div class="arch__rail-item">Binance PK</div>
+              <div class="arch__rail-item">Rain · BH</div>
+              <div class="arch__rail-item">Fasset</div>
+              <div class="arch__rail-item">Custody co.</div>
+            </div>
+            <p class="arch__rail-note">VASP holds the licence and custody — axe. never holds crypto.</p>
+          </div>
+        </div>
+      </div>
+      <p class="arch__caption">A single transaction can fan out to one fiat PSP and one crypto VASP, chosen at routing time from a pool that grows as more partners onboard.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PRODUCT SHOWCASE ============== -->
+<section id="products">
+  <div class="container">
+    <div class="sect-head">
+      <span class="sect-eyebrow">Products</span>
+      <h2 class="display display-lg" style="margin-top:18px">Six modules. One contract. One integration.</h2>
+      <p class="lead">Banks turn modules on as they need them. Most start with on-ramp and add transfers in month two.</p>
+    </div>
+
+    <div class="showcase">
+
+      <!-- On-ramp -->
+      <div class="show-row" id="onramp">
+        <div>
+          <span class="show-row__eyebrow">On-ramp · Buy</span>
+          <h3 class="show-row__title">Convert PKR to crypto in seconds — without leaving your app.</h3>
+          <p class="show-row__desc">Bank customer initiates a buy in your app. axe. quotes across every connected VASP, picks the best execution, and settles to the customer's wallet. PKR is debited via RAAST or IBFT. The customer sees your brand the whole time.</p>
+          <ul class="show-row__bullets">
+            <li><span>Sub-second quotes from a multi-VASP order book.</span></li>
+            <li><span>RAAST · 1LINK · card · mobile wallet PSPs supported.</span></li>
+            <li><span>Webhook on settled — typical 4–8 seconds end-to-end.</span></li>
+          </ul>
+          <a href="#contact" class="link-arr">Read the on-ramp spec <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+        <div class="show-row__visual">
+          <svg viewBox="0 0 360 270" width="360" height="270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9CA3AF"/></marker></defs>
+            <rect x="14" y="22" width="120" height="48" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="74" y="48" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#FAFAF7" text-anchor="middle">PKR 50,000</text>
+            <text x="74" y="62" font-family="Inter, sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">Bank app</text>
+            <rect x="120" y="106" width="120" height="58" rx="8" fill="#C8FF00"/>
+            <text x="180" y="132" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#0B0F1A" text-anchor="middle">axe.</text>
+            <text x="180" y="150" font-family="Inter, sans-serif" font-size="10" fill="#0B0F1A" text-anchor="middle">Quote · KYT · Route</text>
+            <rect x="226" y="22" width="120" height="48" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="286" y="48" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#FAFAF7" text-anchor="middle">179.27 USDT</text>
+            <text x="286" y="62" font-family="Inter, sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">Customer wallet</text>
+            <rect x="14" y="200" width="160" height="42" rx="4" fill="none" stroke="#1A1F2E"/>
+            <text x="94" y="220" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#9CA3AF" text-anchor="middle" letter-spacing="2">FIAT RAIL</text>
+            <text x="94" y="234" font-family="Inter, sans-serif" font-size="10" fill="#FAFAF7" text-anchor="middle">RAAST</text>
+            <rect x="186" y="200" width="160" height="42" rx="4" fill="none" stroke="#1A1F2E"/>
+            <text x="266" y="220" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#9CA3AF" text-anchor="middle" letter-spacing="2">CRYPTO RAIL</text>
+            <text x="266" y="234" font-family="Inter, sans-serif" font-size="10" fill="#FAFAF7" text-anchor="middle">VASP</text>
+            <line x1="74" y1="70" x2="120" y2="130" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr1)"/>
+            <line x1="240" y1="130" x2="286" y2="70" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr1)"/>
+            <line x1="150" y1="164" x2="94" y2="200" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr1)"/>
+            <line x1="210" y1="164" x2="266" y2="200" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr1)"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Off-ramp - arrows fixed -->
+      <div class="show-row show-row--reverse" id="offramp">
+        <div>
+          <span class="show-row__eyebrow">Off-ramp · Sell</span>
+          <h3 class="show-row__title">Turn crypto into PKR, settle to a bank account the same day.</h3>
+          <p class="show-row__desc">Customer sells held crypto from inside your app. axe. nets the trade across VASPs, hedges the exposure, and pushes PKR back to the customer's account through RAAST or IBFT. T+0 for retail, T+1 for institutional volumes.</p>
+          <ul class="show-row__bullets">
+            <li><span>Net-zero principal at axe. — every leg attributed to one Order.</span></li>
+            <li><span>FX exposure neutralised at quote time — no slippage to the bank.</span></li>
+            <li><span>SBP-format reconciliation file delivered daily by 06:00 PKT.</span></li>
+          </ul>
+          <a href="#contact" class="link-arr">Read the off-ramp spec <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+        <div class="show-row__visual">
+          <svg viewBox="0 0 360 270" width="360" height="270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9CA3AF"/></marker></defs>
+            <!-- top-left: customer wallet (USDT in) -->
+            <rect x="14" y="22" width="120" height="48" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="74" y="48" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#FAFAF7" text-anchor="middle">100 USDT</text>
+            <text x="74" y="62" font-family="Inter, sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">Customer wallet</text>
+            <!-- centre: axe. -->
+            <rect x="120" y="106" width="120" height="58" rx="8" fill="#C8FF00"/>
+            <text x="180" y="132" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#0B0F1A" text-anchor="middle">axe.</text>
+            <text x="180" y="150" font-family="Inter, sans-serif" font-size="10" fill="#0B0F1A" text-anchor="middle">Net · Hedge · Settle</text>
+            <!-- top-right: bank account (PKR out) -->
+            <rect x="226" y="22" width="120" height="48" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="286" y="48" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#FAFAF7" text-anchor="middle">PKR 27,890</text>
+            <text x="286" y="62" font-family="Inter, sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">Bank account</text>
+            <!-- bottom: settlement -->
+            <rect x="60" y="200" width="240" height="42" rx="4" fill="none" stroke="#1A1F2E"/>
+            <text x="180" y="220" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#FAFAF7" text-anchor="middle" letter-spacing="2">T+0 SETTLEMENT · RAAST</text>
+            <text x="180" y="234" font-family="Inter, sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">FX neutralised at quote · zero slippage to the bank</text>
+            <!-- arrows: wallet → axe (USDT in), axe → bank (PKR out), axe → settlement (down) -->
+            <line x1="74" y1="70" x2="120" y2="130" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="240" y1="130" x2="286" y2="70" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr2)"/>
+            <line x1="180" y1="164" x2="180" y2="200" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr2)"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Transfer -->
+      <div class="show-row" id="transfer">
+        <div>
+          <span class="show-row__eyebrow">Transfer · Cross-border</span>
+          <h3 class="show-row__title">Stablecoin transfers with FATF-grade originator data.</h3>
+          <p class="show-row__desc">Move USDT, USDC, or PYUSD between wallets — including between VASPs in different jurisdictions. Travel Rule payload assembled and exchanged automatically using IVMS 101. Failed counterparty exchanges are blocked at submission, not after settlement.</p>
+          <ul class="show-row__bullets">
+            <li><span>Travel Rule via TRP, TRUST, Notabene, or Sumsub — pick one or all.</span></li>
+            <li><span>Per-corridor threshold and policy controls.</span></li>
+            <li><span>Counterparty due-diligence registry maintained by axe.</span></li>
+          </ul>
+          <a href="#contact" class="link-arr">Read the transfer spec <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+        <div class="show-row__visual">
+          <svg viewBox="0 0 360 270" width="360" height="270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9CA3AF"/></marker></defs>
+            <rect x="14" y="20" width="100" height="46" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="64" y="44" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">VASP · PK</text>
+            <text x="64" y="58" font-family="Inter, sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">Originator</text>
+            <rect x="246" y="20" width="100" height="46" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="296" y="44" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">VASP · UAE</text>
+            <text x="296" y="58" font-family="Inter, sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">Beneficiary</text>
+            <rect x="100" y="98" width="160" height="64" rx="8" fill="#C8FF00"/>
+            <text x="180" y="124" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700" fill="#0B0F1A" text-anchor="middle">axe. travel rule</text>
+            <text x="180" y="140" font-family="Inter, sans-serif" font-size="10" fill="#0B0F1A" text-anchor="middle">IVMS 101 payload</text>
+            <text x="180" y="154" font-family="Inter, sans-serif" font-size="10" fill="#0B0F1A" text-anchor="middle">FATF Recommendation 16</text>
+            <rect x="60" y="195" width="240" height="48" rx="4" fill="none" stroke="#1A1F2E"/>
+            <text x="180" y="216" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#FAFAF7" text-anchor="middle">100 USDT · ERC-20</text>
+            <text x="180" y="232" font-family="Inter, sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">on-chain settlement when payload acknowledged</text>
+            <line x1="114" y1="44" x2="160" y2="100" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr3)"/>
+            <line x1="246" y1="44" x2="200" y2="100" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr3)"/>
+            <line x1="180" y1="162" x2="180" y2="195" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr3)"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Smart Routing -->
+      <div class="show-row show-row--reverse" id="routing">
+        <div>
+          <span class="show-row__eyebrow">Smart Routing</span>
+          <h3 class="show-row__title">One API, optimal execution across every VASP and PSP.</h3>
+          <p class="show-row__desc">For each order axe. scores every counterparty on cost, depth, latency, and live uptime — then routes the leg to whichever path wins. When a VASP degrades, fail-over is automatic. The bank sees one consistent SLA.</p>
+          <ul class="show-row__bullets">
+            <li><span>Per-tenant routing weights — exclude or prefer specific counterparties.</span></li>
+            <li><span>Live health probes; degraded counterparties cool off automatically.</span></li>
+            <li><span>Decision log on every order — auditable down to the millisecond.</span></li>
+          </ul>
+          <a href="#contact" class="link-arr">See routing decisions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+        <div class="show-row__visual">
+          <svg viewBox="0 0 360 270" width="360" height="270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="arr4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9CA3AF"/></marker><marker id="arr4w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C8FF00"/></marker></defs>
+            <rect x="120" y="14" width="120" height="48" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="180" y="40" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#FAFAF7" text-anchor="middle">ORDER</text>
+            <text x="180" y="54" font-family="Inter, sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">PKR → USDT</text>
+            <rect x="120" y="100" width="120" height="50" rx="8" fill="#C8FF00"/>
+            <text x="180" y="124" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#0B0F1A" text-anchor="middle">SCORE 4 PATHS</text>
+            <text x="180" y="140" font-family="Inter, sans-serif" font-size="9" fill="#0B0F1A" text-anchor="middle">cost · depth · latency · uptime</text>
+            <rect x="14" y="190" width="76" height="60" rx="6" fill="#0B0F1A" stroke="#C8FF00"/>
+            <text x="52" y="210" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">VASP A</text>
+            <text x="52" y="226" font-family="Inter, sans-serif" font-size="10" fill="#C8FF00" text-anchor="middle" font-weight="600">★ won</text>
+            <text x="52" y="240" font-family="JetBrains Mono, monospace" font-size="9" fill="#9CA3AF" text-anchor="middle">94</text>
+            <rect x="98" y="190" width="76" height="60" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="136" y="210" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">VASP B</text>
+            <text x="136" y="240" font-family="JetBrains Mono, monospace" font-size="9" fill="#9CA3AF" text-anchor="middle">88</text>
+            <rect x="182" y="190" width="76" height="60" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="220" y="210" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">VASP C</text>
+            <text x="220" y="240" font-family="JetBrains Mono, monospace" font-size="9" fill="#9CA3AF" text-anchor="middle">81</text>
+            <rect x="266" y="190" width="76" height="60" rx="6" fill="#0B0F1A" stroke="#1A1F2E" opacity="0.6"/>
+            <text x="304" y="210" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">VASP D</text>
+            <text x="304" y="226" font-family="Inter, sans-serif" font-size="10" fill="#9CA3AF" text-anchor="middle">cooled</text>
+            <text x="304" y="240" font-family="JetBrains Mono, monospace" font-size="9" fill="#9CA3AF" text-anchor="middle">62</text>
+            <line x1="180" y1="62" x2="180" y2="100" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr4)"/>
+            <line x1="180" y1="150" x2="52" y2="190" stroke="#C8FF00" stroke-width="1.5" marker-end="url(#arr4w)"/>
+            <line x1="180" y1="150" x2="136" y2="190" stroke="#1A1F2E" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="180" y1="150" x2="220" y2="190" stroke="#1A1F2E" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="180" y1="150" x2="304" y2="190" stroke="#1A1F2E" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- KYT -->
+      <div class="show-row" id="kyt">
+        <div>
+          <span class="show-row__eyebrow">KYT &amp; Compliance</span>
+          <h3 class="show-row__title">The compliance stack you don't have to build.</h3>
+          <p class="show-row__desc">Pre-submission KYT screening on every wallet and address. Sanctions, PEP, and adverse-media checks. Suspicious-transaction case management. SAR/STR templates aligned to FMU and SBP. Plug into your GRC stack or use ours.</p>
+          <ul class="show-row__bullets">
+            <li><span>Vendor-agnostic — Chainalysis, TRM Labs, Elliptic supported.</span></li>
+            <li><span>Per-tenant risk thresholds and override rules.</span></li>
+            <li><span>Append-only, hash-chained audit log on every decision.</span></li>
+          </ul>
+          <a href="#contact" class="link-arr">Read the compliance brief <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+        <div class="show-row__visual">
+          <svg viewBox="0 0 360 270" width="360" height="270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="arr5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9CA3AF"/></marker></defs>
+            <rect x="100" y="20" width="160" height="44" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="180" y="46" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#FAFAF7" text-anchor="middle">INCOMING ORDER</text>
+            <rect x="32" y="92" width="124" height="48" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="94" y="116" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">SANCTIONS</text>
+            <text x="94" y="132" font-family="Inter, sans-serif" font-size="9" fill="#C8FF00" text-anchor="middle" font-weight="600">CLEAR</text>
+            <rect x="204" y="92" width="124" height="48" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="266" y="116" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">KYT WALLET</text>
+            <text x="266" y="132" font-family="JetBrains Mono, monospace" font-size="10" fill="#C8FF00" text-anchor="middle">12 / 100</text>
+            <rect x="32" y="156" width="124" height="48" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="94" y="180" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">TRAVEL RULE</text>
+            <text x="94" y="196" font-family="Inter, sans-serif" font-size="9" fill="#C8FF00" text-anchor="middle" font-weight="600">PAYLOAD READY</text>
+            <rect x="204" y="156" width="124" height="48" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="266" y="180" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">PEP / ADVERSE</text>
+            <text x="266" y="196" font-family="Inter, sans-serif" font-size="9" fill="#C8FF00" text-anchor="middle" font-weight="600">CLEAR</text>
+            <rect x="100" y="222" width="160" height="34" rx="4" fill="#C8FF00"/>
+            <text x="180" y="244" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#0B0F1A" text-anchor="middle">SUBMIT TO VASP →</text>
+            <line x1="180" y1="64" x2="180" y2="92" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr5)"/>
+            <line x1="180" y1="204" x2="180" y2="222" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr5)"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Reconciliation -->
+      <div class="show-row show-row--reverse" id="recon">
+        <div>
+          <span class="show-row__eyebrow">Reconciliation</span>
+          <h3 class="show-row__title">Daily reconciliation across PSP, VASP, and your ledger.</h3>
+          <p class="show-row__desc">Every settled order is reconciled against the corresponding line in the bank's ledger, the PSP's settlement file, and the VASP's daily file. Breaks surface in our admin console with a runbook attached. Exporters available in your accounting format.</p>
+          <ul class="show-row__bullets">
+            <li><span>SBP-format daily file delivered before 06:00 PKT.</span></li>
+            <li><span>Per-counterparty break SLA — most clear within 24 hours.</span></li>
+            <li><span>Direct push to QuickBooks, Xero, NetSuite, Oracle ERP, or SFTP.</span></li>
+          </ul>
+          <a href="#contact" class="link-arr">Read the reconciliation spec <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+        <div class="show-row__visual">
+          <svg viewBox="0 0 360 270" width="360" height="270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="arr6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9CA3AF"/></marker></defs>
+            <rect x="14" y="22" width="100" height="60" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="64" y="44" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">PSP file</text>
+            <text x="64" y="60" font-family="Inter, sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">RAAST · 1LINK</text>
+            <text x="64" y="74" font-family="JetBrains Mono, monospace" font-size="9" fill="#C8FF00" text-anchor="middle">7,418 rows</text>
+            <rect x="130" y="22" width="100" height="60" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="180" y="44" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">axe. ledger</text>
+            <text x="180" y="60" font-family="Inter, sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">internal</text>
+            <text x="180" y="74" font-family="JetBrains Mono, monospace" font-size="9" fill="#C8FF00" text-anchor="middle">7,419 rows</text>
+            <rect x="246" y="22" width="100" height="60" rx="6" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="296" y="44" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">VASP file</text>
+            <text x="296" y="60" font-family="Inter, sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">A · B · C · n</text>
+            <text x="296" y="74" font-family="JetBrains Mono, monospace" font-size="9" fill="#C8FF00" text-anchor="middle">7,419 rows</text>
+            <rect x="80" y="118" width="200" height="56" rx="8" fill="#C8FF00"/>
+            <text x="180" y="142" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0B0F1A" text-anchor="middle">RECONCILIATION ENGINE</text>
+            <text x="180" y="158" font-family="Inter, sans-serif" font-size="10" fill="#0B0F1A" text-anchor="middle">match · diff · attribute</text>
+            <rect x="14" y="208" width="220" height="42" rx="4" fill="#0B0F1A" stroke="#1A1F2E"/>
+            <text x="124" y="226" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#FAFAF7" text-anchor="middle">7,418 matched</text>
+            <text x="124" y="242" font-family="JetBrains Mono, monospace" font-size="9" fill="#9CA3AF" text-anchor="middle">99.99% auto-clear</text>
+            <rect x="246" y="208" width="100" height="42" rx="4" fill="#0B0F1A" stroke="#C8FF00"/>
+            <text x="296" y="226" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="700" fill="#C8FF00" text-anchor="middle">1 break</text>
+            <text x="296" y="242" font-family="Inter, sans-serif" font-size="9" fill="#9CA3AF" text-anchor="middle">runbook attached</text>
+            <line x1="64" y1="82" x2="150" y2="118" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr6)"/>
+            <line x1="180" y1="82" x2="180" y2="118" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr6)"/>
+            <line x1="296" y1="82" x2="210" y2="118" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr6)"/>
+            <line x1="180" y1="174" x2="180" y2="208" stroke="#9CA3AF" stroke-width="1" marker-end="url(#arr6)"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== INDUSTRIES ============== -->
+<section class="industries-band" id="solutions">
+  <div class="container">
+    <div class="sect-head">
+      <span class="sect-eyebrow">Across sectors</span>
+      <h2 class="display display-lg" style="margin-top:18px">Built for every regulated entity that wants to offer crypto.</h2>
+      <p class="lead">Eight institution types we sell to. The integration surface is the same in every case.</p>
+    </div>
+    <div class="industries">
+      <div class="industry"><div class="industry__num">01</div><div class="industry__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></div><div class="industry__title">Commercial banks</div><p class="industry__desc">Tier-1 and mid-tier banks adding regulated digital-asset products without a new licence.</p></div>
+      <div class="industry"><div class="industry__num">02</div><div class="industry__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 12h20"/></svg></div><div class="industry__title">Digital banks &amp; EMIs</div><p class="industry__desc">Tech-native institutions where customer demand for crypto on-ramp is already loud.</p></div>
+      <div class="industry"><div class="industry__num">03</div><div class="industry__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="industry__title">Brokerages</div><p class="industry__desc">Stock and asset-management firms expanding into digital assets alongside equities.</p></div>
+      <div class="industry"><div class="industry__num">04</div><div class="industry__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="industry__title">Remittance corridors</div><p class="industry__desc">Stablecoin rails for inbound and outbound remittance — Gulf, UK, US, Europe.</p></div>
+      <div class="industry"><div class="industry__num">05</div><div class="industry__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div class="industry__title">Treasury &amp; corporate</div><p class="industry__desc">Stablecoin holdings, hedging, and settlement across multi-country operations.</p></div>
+      <div class="industry"><div class="industry__num">06</div><div class="industry__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h20v18H2z"/><path d="M2 9h20"/></svg></div><div class="industry__title">Payment service providers</div><p class="industry__desc">Existing aggregators and gateways adding crypto rails alongside fiat.</p></div>
+      <div class="industry"><div class="industry__num">07</div><div class="industry__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg></div><div class="industry__title">Wealth managers</div><p class="industry__desc">Digital-asset allocation, stablecoin yield, and tokenised products for private clients.</p></div>
+      <div class="industry"><div class="industry__num">08</div><div class="industry__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20"/><path d="M2 7h20"/><path d="M2 17h20"/></svg></div><div class="industry__title">Crypto-native B2B</div><p class="industry__desc">Exchanges and wallets expanding into Pakistan with regulated rails.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== INFRA TABS ============== -->
+<section class="infra-band" id="infra">
+  <div class="container">
+    <div class="sect-head">
+      <span class="sect-eyebrow">Institutional-grade infrastructure</span>
+      <h2 class="display display-lg" style="margin-top:18px">Three layers that make banks comfortable saying yes.</h2>
+      <p class="lead">Liquidity, technology, and compliance — the three things every Tier-1 procurement committee will dig into. Each is purpose-built for a Pakistani regulated entity.</p>
+    </div>
+    <div class="infra-tabs">
+      <div class="infra-nav">
+        <button class="infra-tab active" data-target="liq">
+          <span class="infra-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l4-4 4 4 4-6 6 8"/></svg></span>
+          <span><span class="infra-tab__title">Liquidity</span><span class="infra-tab__sub">Aggregated across licensed VASPs</span></span>
+          <svg class="infra-tab__arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+        <button class="infra-tab" data-target="tech">
+          <span class="infra-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></span>
+          <span><span class="infra-tab__title">Technology</span><span class="infra-tab__sub">Bank-grade APIs and uptime</span></span>
+          <svg class="infra-tab__arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+        <button class="infra-tab" data-target="comp">
+          <span class="infra-tab__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></span>
+          <span><span class="infra-tab__title">Compliance &amp; Security</span><span class="infra-tab__sub">PVARA Sandbox · ISO-27001</span></span>
+          <svg class="infra-tab__arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="infra-panel active" id="liq">
+        <h3 class="infra-panel__title">Aggregated liquidity, attributed to your customers.</h3>
+        <p class="infra-panel__desc">axe. routes across every licensed VASP we contract with — never holding crypto, always attributing each leg to a specific Order. The bank gets execution depth without owning custody.</p>
+        <div class="infra-grid">
+          <div class="infra-item"><div class="infra-item__num">3–5+</div><div class="infra-item__title">VASPs per market at launch</div><div class="infra-item__desc">Adding a new partner is a single connector file — no changes to bank integration.</div></div>
+          <div class="infra-item"><div class="infra-item__num">24×7</div><div class="infra-item__title">Continuous markets</div><div class="infra-item__desc">Crypto rails do not close on weekends or bank holidays.</div></div>
+          <div class="infra-item"><div class="infra-item__num">100+</div><div class="infra-item__title">Tokens supported</div><div class="infra-item__desc">Major stablecoins at launch; long-tail added on bank request.</div></div>
+          <div class="infra-item"><div class="infra-item__num">Zero</div><div class="infra-item__title">Principal balance at axe.</div><div class="infra-item__desc">Net-zero by design — provable from network and ledger data.</div></div>
+        </div>
+      </div>
+      <div class="infra-panel" id="tech">
+        <h3 class="infra-panel__title">Bank-grade APIs designed by engineers who've worked at banks.</h3>
+        <p class="infra-panel__desc">Idempotent endpoints. HMAC signatures both directions. OpenAPI spec auto-generated from typed schemas. Sandbox parity with production. Status page public from day one.</p>
+        <div class="infra-grid">
+          <div class="infra-item"><div class="infra-item__num">99.95%</div><div class="infra-item__title">Production SLA target</div><div class="infra-item__desc">Multi-region, with credit terms in every contract.</div></div>
+          <div class="infra-item"><div class="infra-item__num">&lt;200ms</div><div class="infra-item__title">Quote API p95</div><div class="infra-item__desc">From your edge to ours, including KYT pre-screen.</div></div>
+          <div class="infra-item"><div class="infra-item__num">TS · Java · Python</div><div class="infra-item__title">First-party SDKs</div><div class="infra-item__desc">Generated from the OpenAPI spec; published per release.</div></div>
+          <div class="infra-item"><div class="infra-item__num">At-least-once</div><div class="infra-item__title">Webhook delivery</div><div class="infra-item__desc">Signed, retried, idempotent — verifiable replay window of 7 days.</div></div>
+        </div>
+      </div>
+      <div class="infra-panel" id="comp">
+        <h3 class="infra-panel__title">Compliance that survives a Tier-1 procurement review.</h3>
+        <p class="infra-panel__desc">SBP and PVARA Sandbox engagement underway, AML Act 2010 Reporting Entity registration in progress. SOC 2 Type II and ISO 27001 sequenced for the first 18 months. Travel Rule baked into the platform — not bolted on.</p>
+        <div class="infra-grid">
+          <div class="infra-item"><div class="infra-item__num">FATF R.16</div><div class="infra-item__title">Travel Rule native</div><div class="infra-item__desc">IVMS 101 payload generation and counterparty exchange built into every transfer.</div></div>
+          <div class="infra-item"><div class="infra-item__num">Hash-chained</div><div class="infra-item__title">Append-only audit log</div><div class="infra-item__desc">Verifiable from network data — every state change is signed and chained.</div></div>
+          <div class="infra-item"><div class="infra-item__num">SBP-ready</div><div class="infra-item__title">Recon &amp; reporting files</div><div class="infra-item__desc">Pre-formatted for State Bank returns, FMU, and your internal GRC stack.</div></div>
+          <div class="infra-item"><div class="infra-item__num">SOC 2 + ISO</div><div class="infra-item__title">Audit roadmap</div><div class="infra-item__desc">Type II issuance targeted within 12 months of go-live.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== STATS BAND ============== -->
+<section class="scale tight">
+  <div class="container">
+    <div class="scale__grid">
+      <div class="scale__intro">
+        <h2>Built for a country, not a corridor.</h2>
+        <p>Pakistan is a top-three country by grass-roots crypto adoption. axe. is the only aggregator built natively for its rails.</p>
+      </div>
+      <div class="scale__num"><div class="scale__num-big" data-count="35" data-prefix="$" data-suffix="B+">$35B+</div><div class="scale__num-lbl">Annual remittance pool</div></div>
+      <div class="scale__num"><div class="scale__num-big" data-count="130" data-suffix="M+">130M+</div><div class="scale__num-lbl">Bankable population</div></div>
+      <div class="scale__num"><div class="scale__num-big">#<span class="voltage" data-count="3">3</span></div><div class="scale__num-lbl">Global crypto adoption</div></div>
+      <div class="scale__num"><div class="scale__num-big">8–12 wks</div><div class="scale__num-lbl">Bank to live API</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== INSIGHTS ============== -->
+<section id="newsroom">
+  <div class="container">
+    <div class="sect-head">
+      <span class="sect-eyebrow">Insights &amp; newsroom</span>
+      <h2 class="display display-lg" style="margin-top:18px">What's latest in the news?</h2>
+      <p class="lead">Strategy notes, regulator timelines, and engineering deep-dives from the axe. team and our partners.</p>
+    </div>
+    <div class="insights">
+      <a class="insight" href="#"><div class="insight__cover"><span class="insight__cover-tag">Regulation</span><div class="insight__cover-title">PVARA framework — what it means for Tier-1 banks</div></div><div class="insight__body"><span class="insight__date">APR 18, 2026 · STRATEGY</span><h4 class="insight__head">A first read of the PVARA framework</h4><p class="insight__excerpt">The PVARA framework opens a licensing pathway for VASPs but does not require banks to become VASPs themselves. We unpack the four operational implications.</p><span class="insight__more">Read more →</span></div></a>
+      <a class="insight" href="#"><div class="insight__cover"><span class="insight__cover-tag">Engineering</span><div class="insight__cover-title">Why we treat the order as a Temporal saga</div></div><div class="insight__body"><span class="insight__date">APR 11, 2026 · ENGINEERING</span><h4 class="insight__head">Idempotency, replay, and the order lifecycle</h4><p class="insight__excerpt">A walk-through of how every axe. order is modelled as a Temporal workflow — and why the database is a projection, not the source of truth.</p><span class="insight__more">Read more →</span></div></a>
+      <a class="insight" href="#"><div class="insight__cover"><span class="insight__cover-tag">Compliance</span><div class="insight__cover-title">Travel Rule for Pakistan — IVMS 101 in practice</div></div><div class="insight__body"><span class="insight__date">APR 02, 2026 · COMPLIANCE</span><h4 class="insight__head">A practical guide to FATF R.16</h4><p class="insight__excerpt">Where the threshold lands, how counterparty exchange works, and the four edge cases every Pakistani VASP and bank should design for now.</p><span class="insight__more">Read more →</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="tight">
+  <div class="container">
+    <div class="sect-head">
+      <span class="sect-eyebrow">FAQ</span>
+      <h2 class="display display-lg" style="margin-top:18px">The questions every bank brings to the first meeting.</h2>
+      <p class="lead">If yours is not listed, we'll send the spec and a regulator letter on request.</p>
+    </div>
+    <div class="faq">
+      <details class="faq-item" open><summary>Is axe. a VASP?</summary><div class="faq-item__body">No. axe. is an orchestration layer that routes between licensed VASPs and licensed PSPs. We never hold customer crypto and never carry a principal balance in fiat. Custody and licensing live with our partners — provable from our network and ledger data, and a feature our customers' regulators specifically prefer.</div></details>
+      <details class="faq-item"><summary>Does the bank need a new licence to use axe.?</summary><div class="faq-item__body">No. The bank operates under its existing licence as a commercial bank, EMI, or PSO. axe. partners hold the VASP and PSP licences. We provide the regulator-facing documentation that explains this and join calls with SBP and PVARA when required.</div></details>
+      <details class="faq-item"><summary>Which assets are supported at launch?</summary><div class="faq-item__body">Major stablecoins (USDT, USDC, PYUSD), BTC, and ETH at launch. Long-tail tokens are added per bank request, subject to per-corridor risk and Travel Rule readiness.</div></details>
+      <details class="faq-item"><summary>What does the customer journey look like?</summary><div class="faq-item__body">The customer never leaves the bank's app. axe. is invisible infrastructure — the bank renders its own UI, calls our API, and receives signed webhooks. The customer sees a typical 4–8 second end-to-end on-ramp.</div></details>
+      <details class="faq-item"><summary>How long is integration?</summary><div class="faq-item__body">Eight to twelve weeks from signed contract to live API in production for a bank with a published developer portal. Sandbox keys are issued on day one. The longest pole is typically the bank's internal compliance review, not the engineering work.</div></details>
+      <details class="faq-item"><summary>What happens during a VASP outage?</summary><div class="faq-item__body">Smart routing detects degraded counterparties via continuous health probes and shifts new orders to other VASPs. In-flight orders complete on the original counterparty unless they are clearly stuck — in which case our admin runbook initiates manual rerouting. The bank sees one consistent SLA.</div></details>
+      <details class="faq-item"><summary>What does pricing look like?</summary><div class="faq-item__body">A blended bps fee per transaction (30–80 bps depending on volume and corridor) plus a base platform fee that funds dedicated regulatory and engineering capacity. We avoid the bps-only model — it commoditises the relationship and starves the work that actually matters for a regulated launch.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CTA ============== -->
+<section class="cta-band" id="contact">
+  <div class="container cta-grid">
+    <div>
+      <span class="sect-eyebrow">The next 30 minutes</span>
+      <h2 style="margin-top:18px">Sound interesting? Connect with us.</h2>
+      <p>One call. We share the architecture, the integration plan, the regulator-facing memo, and a draft term sheet. If the fit is right, we walk away with sandbox credentials and an eight-week pilot path.</p>
+      <div class="cta-band__buttons">
+        <a href="mailto:hello@axepayments.com" class="btn btn--lime">Talk to sales <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a href="#docs" class="btn btn--ghost">Read docs</a>
+      </div>
+    </div>
+    <div class="cta-band__list">
+      <div class="cta-band__list-item">A 30-minute architecture &amp; product walkthrough.</div>
+      <div class="cta-band__list-item">Sandbox credentials issued on the call.</div>
+      <div class="cta-band__list-item">A draft term sheet within five business days.</div>
+      <div class="cta-band__list-item">A joint memo to SBP &amp; PVARA if the fit is right.</div>
+      <div class="cta-band__list-item">Reference calls with our existing partners on request.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="#" class="brand">axe<span class="dot">.</span></a>
+        <p class="footer__brand-desc">The API for regulated money movement. One API, multiple licensed VASPs, multiple licensed PSPs — without the bank ever holding crypto.</p>
+        <div class="footer__col">
+          <h5>Get in touch</h5>
+          <ul>
+            <li><a href="mailto:hello@axepayments.com">hello@axepayments.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="#onramp">On-ramp</a></li>
+          <li><a href="#offramp">Off-ramp</a></li>
+          <li><a href="#transfer">Transfer</a></li>
+          <li><a href="#routing">Smart Routing</a></li>
+          <li><a href="#kyt">KYT &amp; Compliance</a></li>
+          <li><a href="#recon">Reconciliation</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="#solutions">Banks</a></li>
+          <li><a href="#solutions">Digital banks &amp; EMIs</a></li>
+          <li><a href="#solutions">Brokerages</a></li>
+          <li><a href="#solutions">Remittance</a></li>
+          <li><a href="#solutions">Treasury</a></li>
+          <li><a href="#solutions">PSPs</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Developers</h5>
+        <ul>
+          <li><a href="#">API documentation</a></li>
+          <li><a href="#">Sandbox</a></li>
+          <li><a href="#">SDKs</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#">Changelog</a></li>
+          <li><a href="#">Postman collection</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#newsroom">Newsroom</a></li>
+          <li><a href="#">Trust center</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bot">
+      <p>© 2026 Axe Payments Limited. All rights reserved. Registered in Pakistan; services available only to regulated counterparties under contract.</p>
+      <div class="footer__legal">
+        <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimers</a><a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- Tabs ----
+  document.querySelectorAll('.infra-tab').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-target');
+      document.querySelectorAll('.infra-tab').forEach((b) => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.infra-panel').forEach((p) => p.classList.toggle('active', p.id === target));
+    });
+  });
+
+  // ---- Word rotator (crypto / money / banking) ----
+  const rot = document.querySelector('.rotator');
+  if (rot) {
+    const words = (rot.dataset.words || '').split(',').map(s => s.trim()).filter(Boolean);
+    let i = 0;
+    setInterval(() => {
+      rot.classList.add('is-out');
+      setTimeout(() => {
+        i = (i + 1) % words.length;
+        rot.textContent = words[i];
+        rot.classList.remove('is-out');
+      }, 280);
+    }, 2400);
+  }
+
+  // ---- Scroll reveals ----
+  const revealEls = [
+    ...document.querySelectorAll('.sect-head'),
+    ...document.querySelectorAll('.show-row'),
+    ...document.querySelectorAll('.arch__box'),
+    ...document.querySelectorAll('.scale__grid'),
+    ...document.querySelectorAll('.cta-grid > *'),
+    ...document.querySelectorAll('.faq'),
+    ...document.querySelectorAll('.live-card'),
+    ...document.querySelectorAll('.hero__title, .hero__sub, .hero__cta, .hero__metrics, .hero__eyebrow'),
+  ];
+  revealEls.forEach((el) => el.classList.add('reveal'));
+  const stagger = [
+    document.querySelector('.pillars'),
+    document.querySelector('.industries'),
+    document.querySelector('.insights'),
+    document.querySelector('.infra-nav'),
+    document.querySelector('.showcase'),
+    document.querySelector('.compliance__items'),
+  ].filter(Boolean);
+  stagger.forEach((el) => el.classList.add('reveal-stagger'));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        e.target.querySelectorAll('[data-count]').forEach(animateCount);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => io.observe(el));
+
+  // ---- Count up ----
+  function animateCount(el) {
+    if (el.dataset.counted) return;
+    el.dataset.counted = '1';
+    const target = parseFloat(el.getAttribute('data-count'));
+    const prefix = el.getAttribute('data-prefix') || '';
+    const suffix = el.getAttribute('data-suffix') || '';
+    if (Number.isNaN(target)) return;
+    const dur = 1300, start = performance.now();
+    function tick(now) {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const v = target * eased;
+      const formatted = (target % 1 === 0) ? Math.round(v) : v.toFixed(1);
+      el.textContent = prefix + formatted + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  document.querySelectorAll('[data-count]').forEach((el) => {
+    const ioCount = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { animateCount(e.target); ioCount.unobserve(e.target); } });
+    }, { threshold: 0.4 });
+    ioCount.observe(el);
+  });
+
+  // ---- Scroll progress ----
+  const progress = document.getElementById('scrollProgress');
+  if (progress) {
+    const onScroll = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (h.scrollTop) / max * 100 : 0;
+      progress.style.width = pct.toFixed(2) + '%';
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ---- Live pill cycle ----
+  const pill = document.getElementById('livePill');
+  if (pill) {
+    setInterval(() => {
+      const n = (3.6 + Math.random() * 1.6).toFixed(1);
+      pill.textContent = `settled · ${n}s`;
+    }, 4200);
+  }
+</script>
+
+</body>
+</html>
